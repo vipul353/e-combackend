@@ -1,10 +1,19 @@
 const express=require("express")
 const cors=require('cors');
+// const { app } = require(".");
+const { connectDb } = require("./config/db");
+
 
 const app=express();
 
 app.use(express.json())
 app.use(cors())
+
+const PORT=5454;
+app.listen(PORT,async ()=>{
+    await connectDb()
+    console.log("ecommerce api listing on port ",PORT)
+})
 
 app.get("/",(req,res)=>{
     return res.status(200).send({message:"welcome to ecommerce api - node"})
